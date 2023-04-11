@@ -1,0 +1,36 @@
+version : "3.9"
+services:
+  node : 
+    container_name : "node-finished_product"
+    image : node:16.13.0-alpine3.14
+    restart : always
+    user : "node"
+    volumes:
+      - ./app:/home/node/app
+    working_dir: /home/node/app
+    enviroment:
+      - NODE_ENV= production
+    ports : 
+      - 8080:8080
+    command: >
+      sh -c "npm install &&
+              npm run watch"
+    depends_on:
+      -mongo
+    mongo:
+      container_name : "mongo_finished_product"
+      image : mongo:5.0.4-focal
+      restart : always
+      ports : 
+        - 27017:27017
+      volumes:
+        - ./db:/data/db
+      enviroment:
+        MONGO_INITDB_ROOT_USERNAME : root
+        MONGO_INITDB_ROOT_PASSWORD : root
+
+
+
+    
+
+
