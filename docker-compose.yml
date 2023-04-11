@@ -2,11 +2,14 @@ version : "3.9"
 services:
   node : 
     container_name : "node-finished_product"
-    image : node:16.13.0-alpine3.14
+    image : node@latest
     restart : always
     user : "node"
     volumes:
       - ./app:/home/node/app
+
+
+      
     working_dir: /home/node/app
     enviroment:
       - NODE_ENV= production
@@ -19,7 +22,7 @@ services:
       -mongo
     mongo:
       container_name : "mongo_finished_product"
-      image : mongo:5.0.4-focal
+      image : mongo@latest
       restart : always
       ports : 
         - 27017:27017
